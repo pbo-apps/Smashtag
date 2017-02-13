@@ -10,8 +10,28 @@ import UIKit
 
 class TweetTableViewController: UITableViewController {
 
+    var tweets = [Array<Tweet>]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    var searchText: String? {
+        didSet {
+            tweets.removeAll()
+            searchForTweets()
+            title = searchText
+        }
+    }
+    
+    private func searchForTweets() {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Dummy initial search text for use while testing
+        searchText = "#stanford"
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
