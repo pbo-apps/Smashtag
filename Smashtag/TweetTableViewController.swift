@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Twitter
 
 class TweetTableViewController: UITableViewController {
 
