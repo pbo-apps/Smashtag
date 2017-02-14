@@ -37,8 +37,17 @@ class TweetTableViewCell: UITableViewCell {
             tweetScreenNameLabel?.text = "\(tweet.user)" // tweet.user.description
             
             if let profileImageURL = tweet.user.profileImageURL {
-                if let imageData = NSData(contentsOf: profileImageURL) { // blocks main thread!!
-                    tweetProfileImageView?.image = UIImage(data: imageData as Data)
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
+                    let contentsOfURL = NSData(contentsOf: profileImageURL)
+                    DispatchQueue.main.async { [weak weakSelf = self] in
+                        if profileImageURL == weakSelf?.tweet?.user.profileImageURL {
+                            if let imageData = contentsOfURL {
+                                weakSelf?.tweetProfileImageView?.image = UIImage(data: imageData as Data)
+                            }
+                        } else {
+                            print("ignored data returned from url \(profileImageURL)")
+                        }
+                    }
                 }
             }
             
@@ -52,4 +61,6 @@ class TweetTableViewCell: UITableViewCell {
         }
         
     }
+    
+    
 }
