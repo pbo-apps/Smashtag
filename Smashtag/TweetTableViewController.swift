@@ -10,7 +10,9 @@ import UIKit
 import Twitter
 
 class TweetTableViewController: UITableViewController {
-
+    
+    // MARK: - Model
+    
     var tweets = [Array<Tweet>]() {
         didSet {
             tableView.reloadData()
@@ -25,8 +27,28 @@ class TweetTableViewController: UITableViewController {
         }
     }
     
+    private var twitterRequest: Twitter.Request? {
+        if let query = searchText, !query.isEmpty {
+            return Twitter.Request(search: query + " -filter:retweets", count: 100)
+        }
+        return nil
+    }
+    
+    private var lastTwitterRequest: Twitter.Request?
+    
     private func searchForTweets() {
-        
+        if let request = twitterRequest {
+            lastTwitterRequest = request
+            request.fetchTweets { [weak weakSelf = self] newTweets in
+                DispatchQueue.main.async {
+                    if request == weakSelf?.lastTwitterRequest {
+                        if !newTweets.isEmpty {
+                            weakSelf?.tweets.insert(newTweets, at: 0)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -44,19 +66,23 @@ class TweetTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return tweets.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return tweets[section].count
     }
 
+    private struct Storyboard {
+        static let TweetCellIdentifier = "Tweet"
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.TweetCellIdentifier, for: indexPath)
 
-        // Configure the cell...
+        let tweet = tweets[indexPath.section][indexPath.row]
+        cell.textLabel?.text = tweet.text
+        cell.detailTextLabel?.text = tweet.user.name
 
         return cell
     }
