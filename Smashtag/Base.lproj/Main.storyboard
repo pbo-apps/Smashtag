@@ -95,6 +95,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="uYG-8D-ft7"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="dvx-RA-KY7">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle">
+                            <fragment content="Fetching Tweets ...">
+                                <attributes>
+                                    <font key="NSFont" size="18" name=".AppleSystemUIFont"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <connections>
+                            <action selector="refresh" destination="hj2-7c-mdt" eventType="valueChanged" id="K7K-Jg-xEe"/>
+                        </connections>
+                    </refreshControl>
                     <connections>
                         <outlet property="searchTextField" destination="QpE-s8-Nbe" id="08Z-TL-aFd"/>
                     </connections>

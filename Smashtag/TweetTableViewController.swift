@@ -22,16 +22,19 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     var searchText: String? {
         didSet {
             tweets.removeAll()
+            lastTwitterRequest = nil
             searchForTweets()
             title = searchText
         }
     }
     
     private var twitterRequest: Twitter.Request? {
-        if let query = searchText, !query.isEmpty {
-            return Twitter.Request(search: query + " -filter:retweets", count: 100)
+        if lastTwitterRequest == nil {
+            if let query = searchText, !query.isEmpty {
+                return Twitter.Request(search: query + " -filter:retweets", count: 100)
+            }
         }
-        return nil
+        return lastTwitterRequest?.newer
     }
     
     private var lastTwitterRequest: Twitter.Request?
@@ -46,16 +49,23 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                             weakSelf?.tweets.insert(newTweets, at: 0)
                         }
                     }
+                    weakSelf?.refreshControl?.endRefreshing()
                 }
             }
+        } else {
+            self.refreshControl?.endRefreshing()
         }
+    }
+    
+    @IBAction func refresh() {
+        searchForTweets()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
-                
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
