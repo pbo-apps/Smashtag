@@ -63,7 +63,11 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     private func setText(for tweet: Twitter.Tweet) {
-        tweetTextLabel?.text = tweet.text
+        let highlightedText = NSMutableAttributedString(string: tweet.text)
+        for hashtag in tweet.hashtags {
+            highlightedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: hashtag.nsrange)
+        }
+        tweetTextLabel!.attributedText = highlightedText
         if tweetTextLabel?.text != nil {
             for _ in tweet.media {
                 tweetTextLabel.text! += " 📸"
