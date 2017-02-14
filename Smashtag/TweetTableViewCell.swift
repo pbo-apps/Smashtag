@@ -63,11 +63,11 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     private func setText(for tweet: Twitter.Tweet) {
-        let highlightedText = NSMutableAttributedString(string: tweet.text)
-        for hashtag in tweet.hashtags {
-            highlightedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: hashtag.nsrange)
-        }
-        tweetTextLabel!.attributedText = highlightedText
+        let text = NSMutableAttributedString(string: tweet.text)
+        text.highlight(UIColor.orange, for: tweet.hashtags)
+        text.highlight(UIColor.blue, for: tweet.urls)
+        text.highlight(UIColor.magenta, for: tweet.userMentions)
+        tweetTextLabel!.attributedText = text
         if tweetTextLabel?.text != nil {
             for _ in tweet.media {
                 tweetTextLabel.text! += " 📸"
@@ -77,5 +77,13 @@ class TweetTableViewCell: UITableViewCell {
     
     private func setName(for tweet: Twitter.Tweet) {
         tweetScreenNameLabel?.text = "\(tweet.user)" // tweet.user.description
+    }
+}
+
+private extension NSMutableAttributedString {
+    func highlight(_ color: UIColor, for mentions: [Mention]) {
+        for mention in mentions {
+            self.addAttribute(NSForegroundColorAttributeName, value: color, range: mention.nsrange)
+        }
     }
 }
