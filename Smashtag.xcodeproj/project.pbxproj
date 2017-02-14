@@ -12,7 +12,24 @@
 		A1B471C01E5204610067CA9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B471BF1E5204610067CA9E /* Assets.xcassets */; };
 		A1B471C31E5204610067CA9E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1B471C11E5204610067CA9E /* LaunchScreen.storyboard */; };
 		A1B471CC1E5206ED0067CA9E /* TweetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B471CB1E5206ED0067CA9E /* TweetTableViewController.swift */; };
+		A1B471CE1E524EFB0067CA9E /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B471CD1E524EFB0067CA9E /* Twitter.framework */; };
+		A1B471CF1E524EFB0067CA9E /* Twitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A1B471CD1E524EFB0067CA9E /* Twitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A1B471D21E52EFAD0067CA9E /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B471D11E52EFAD0067CA9E /* TweetTableViewCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A1B471D01E524EFB0067CA9E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A1B471CF1E524EFB0067CA9E /* Twitter.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A1B471B51E5204610067CA9E /* Smashtag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smashtag.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +39,8 @@
 		A1B471C21E5204610067CA9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1B471C41E5204610067CA9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1B471CB1E5206ED0067CA9E /* TweetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewController.swift; sourceTree = "<group>"; };
+		A1B471CD1E524EFB0067CA9E /* Twitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Twitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B471D11E52EFAD0067CA9E /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1B471CE1E524EFB0067CA9E /* Twitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +58,7 @@
 		A1B471AC1E5204610067CA9E = {
 			isa = PBXGroup;
 			children = (
+				A1B471CD1E524EFB0067CA9E /* Twitter.framework */,
 				A1B471B71E5204610067CA9E /* Smashtag */,
 				A1B471B61E5204610067CA9E /* Products */,
 			);
@@ -55,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				A1B471BC1E5204610067CA9E /* Main.storyboard */,
+				A1B471D11E52EFAD0067CA9E /* TweetTableViewCell.swift */,
 				A1B471CB1E5206ED0067CA9E /* TweetTableViewController.swift */,
 				A1B471CA1E5204860067CA9E /* Supporting Files */,
 			);
@@ -82,6 +104,7 @@
 				A1B471B11E5204610067CA9E /* Sources */,
 				A1B471B21E5204610067CA9E /* Frameworks */,
 				A1B471B31E5204610067CA9E /* Resources */,
+				A1B471D01E524EFB0067CA9E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -146,6 +169,7 @@
 			files = (
 				A1B471B91E5204610067CA9E /* AppDelegate.swift in Sources */,
 				A1B471CC1E5206ED0067CA9E /* TweetTableViewController.swift in Sources */,
+				A1B471D21E52EFAD0067CA9E /* TweetTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +329,7 @@
 				A1B471C91E5204610067CA9E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

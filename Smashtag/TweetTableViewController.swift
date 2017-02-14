@@ -7,12 +7,65 @@
 //
 
 import UIKit
+import Twitter
 
-class TweetTableViewController: UITableViewController {
-
+class TweetTableViewController: UITableViewController, UITextFieldDelegate {
+    
+    // MARK: - Model
+    
+    var tweets = [Array<Tweet>]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    var searchText: String? {
+        didSet {
+            tweets.removeAll()
+            lastTwitterRequest = nil
+            searchForTweets()
+            title = searchText
+        }
+    }
+    
+    private var twitterRequest: Twitter.Request? {
+        if lastTwitterRequest == nil {
+            if let query = searchText, !query.isEmpty {
+                return Twitter.Request(search: query + " -filter:retweets", count: 100)
+            }
+        }
+        return lastTwitterRequest?.newer
+    }
+    
+    private var lastTwitterRequest: Twitter.Request?
+    
+    private func searchForTweets() {
+        if let request = twitterRequest {
+            lastTwitterRequest = request
+            request.fetchTweets { [weak weakSelf = self] newTweets in
+                DispatchQueue.main.async {
+                    if request == weakSelf?.lastTwitterRequest {
+                        if !newTweets.isEmpty {
+                            weakSelf?.tweets.insert(newTweets, at: 0)
+                        }
+                    }
+                    weakSelf?.refreshControl?.endRefreshing()
+                }
+            }
+        } else {
+            self.refreshControl?.endRefreshing()
+        }
+    }
+    
+    @IBAction func refresh() {
+        searchForTweets()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -23,21 +76,39 @@ class TweetTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return tweets.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return tweets[section].count
     }
 
+    private struct Storyboard {
+        static let TweetCellIdentifier = "Tweet"
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.TweetCellIdentifier, for: indexPath)
 
-        // Configure the cell...
+        let tweet = tweets[indexPath.section][indexPath.row]
+        if let tweetCell = cell as? TweetTableViewCell {
+            tweetCell.tweet = tweet
+        }
 
         return cell
+    }
+    
+    @IBOutlet weak var searchTextField: UITextField! {
+        didSet {
+            searchTextField.delegate = self
+            searchTextField.text = searchText
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        searchText = textField.text
+        return true
     }
     
     /*
