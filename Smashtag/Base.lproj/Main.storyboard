@@ -112,6 +112,7 @@
                     </refreshControl>
                     <connections>
                         <outlet property="searchTextField" destination="QpE-s8-Nbe" id="08Z-TL-aFd"/>
+                        <segue destination="DET-VT-e7H" kind="show" identifier="View Tweet" id="fZg-uV-0lO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NjD-sC-9Mu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -127,7 +128,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Mention" textLabel="Atf-7j-L9P" rowHeight="103" style="IBUITableViewCellStyleDefault" id="A0k-h9-HMT">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Mention" textLabel="Atf-7j-L9P" rowHeight="103" style="IBUITableViewCellStyleDefault" id="A0k-h9-HMT">
                                 <rect key="frame" x="0.0" y="28" width="375" height="103"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A0k-h9-HMT" id="Rrd-SN-41F">

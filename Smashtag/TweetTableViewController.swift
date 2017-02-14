@@ -1,4 +1,4 @@
- //
+//
 //  TweetTableViewController.swift
 //  Smashtag
 //
@@ -85,6 +85,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
 
     private struct Storyboard {
         static let TweetCellIdentifier = "Tweet"
+        static let ViewTweetSegueIdentifier = "View Tweet"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -96,6 +97,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: Storyboard.ViewTweetSegueIdentifier, sender: tweets[indexPath.section][indexPath.row])
     }
     
     @IBOutlet weak var searchTextField: UITextField! {
@@ -111,14 +116,20 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         return true
     }
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == Storyboard.ViewTweetSegueIdentifier {
+            if let mvc = segue.destination as? MentionTableViewController {
+                if let tweet = sender as? Tweet {
+                    mvc.mentions = [tweet.hashtags]
+                }
+            }
+        }
+        
     }
-    */
 
 }
