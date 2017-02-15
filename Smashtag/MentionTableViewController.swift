@@ -12,7 +12,7 @@ import Twitter
 class MentionTableViewController: UITableViewController {
 
     // MARK: - Model
-    var mentions = [Array<Mention>]() {
+    private var details = [TweetDetail]() {
         didSet {
             tableView.reloadData()
         }
@@ -20,8 +20,14 @@ class MentionTableViewController: UITableViewController {
     
     var tweet: Tweet? {
         didSet {
-            mentions = [tweet!.hashtags]
+            details.append(.Mention("Hashtag", tweet!.hashtags))
+            details.append(.Mention("UserMention", tweet!.userMentions))
+            details.append(.Mention("Url", tweet!.urls))
         }
+    }
+    
+    private enum TweetDetail {
+        case Mention(String, [Mention])
     }
     
     override func viewDidLoad() {
@@ -37,11 +43,14 @@ class MentionTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return mentions.count
+        return details.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mentions[section].count
+        switch details[section] {
+        case .Mention(let (_, items)):
+            return items.count
+        }
     }
 
     private struct Storyboard {
@@ -51,12 +60,21 @@ class MentionTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.MentionCellIdentifier, for: indexPath)
 
-        let mention = mentions[indexPath.section][indexPath.row]
-        cell.textLabel?.text = mention.keyword
-
+        switch details[indexPath.section] {
+        case .Mention(let (_, items)):
+            cell.textLabel?.text = items[indexPath.row].keyword
+        }
+        
         return cell
     }
-
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch details[section] {
+        case .Mention(let (name, _)):
+            return name
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
