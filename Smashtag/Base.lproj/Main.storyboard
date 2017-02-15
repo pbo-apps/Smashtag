@@ -34,10 +34,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4dp-wk-y0N">
-                                            <rect key="frame" x="8" y="8" width="359" height="91.5"/>
+                                            <rect key="frame" x="8" y="8" width="359" height="92"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ebc-e2-CTQ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="91.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="92"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9ov-WP-Ycf">
                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -47,7 +47,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3F-av-ap4">
-                                                            <rect key="frame" x="0.0" y="60" width="60" height="31.5"/>
+                                                            <rect key="frame" x="0.0" y="60" width="60" height="32"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -55,16 +55,16 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rxc-El-mPG">
-                                                    <rect key="frame" x="70" y="0.0" width="289" height="91.5"/>
+                                                    <rect key="frame" x="70" y="0.0" width="289" height="92"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="300" text="Tweeter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVa-Ut-JRh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="289" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="289" height="21"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Taz-3d-bW9">
-                                                            <rect key="frame" x="0.0" y="20.5" width="289" height="71"/>
+                                                            <rect key="frame" x="0.0" y="21" width="289" height="71"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -119,24 +119,24 @@
             </objects>
             <point key="canvasLocation" x="776.79999999999995" y="101.19940029985008"/>
         </scene>
-        <!--Mention Table View Controller-->
+        <!--Tweet Detail Table View Controller-->
         <scene sceneID="s8V-M0-K8P">
             <objects>
-                <tableViewController id="DET-VT-e7H" customClass="MentionTableViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="103" sectionHeaderHeight="28" sectionFooterHeight="28" id="UtC-tQ-1Qe">
+                <tableViewController id="DET-VT-e7H" customClass="TweetDetailTableViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="47" sectionHeaderHeight="28" sectionFooterHeight="28" id="UtC-tQ-1Qe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Mention" textLabel="Atf-7j-L9P" rowHeight="103" style="IBUITableViewCellStyleDefault" id="A0k-h9-HMT">
-                                <rect key="frame" x="0.0" y="28" width="375" height="103"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Mention" textLabel="Atf-7j-L9P" rowHeight="47" style="IBUITableViewCellStyleDefault" id="A0k-h9-HMT">
+                                <rect key="frame" x="0.0" y="28" width="375" height="47"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A0k-h9-HMT" id="Rrd-SN-41F">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="102"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Atf-7j-L9P">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="102"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>

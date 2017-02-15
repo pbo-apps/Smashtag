@@ -1,5 +1,5 @@
 //
-//  MentionTableViewController.swift
+//  TweetDetailTableViewController.swift
 //  Smashtag
 //
 //  Created by Pete Bounford on 14/02/2017.
@@ -9,7 +9,7 @@
 import UIKit
 import Twitter
 
-class MentionTableViewController: UITableViewController {
+class TweetDetailTableViewController: UITableViewController {
 
     // MARK: - Model
     private var details = [TweetDetail]() {
