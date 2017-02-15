@@ -99,10 +99,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: Storyboard.ViewTweetSegueIdentifier, sender: tweets[indexPath.section][indexPath.row])
-    }
-    
     @IBOutlet weak var searchTextField: UITextField! {
         didSet {
             searchTextField.delegate = self
@@ -124,8 +120,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         // Pass the selected object to the new view controller.
         if segue.identifier == Storyboard.ViewTweetSegueIdentifier {
             if let mvc = segue.destination as? MentionTableViewController {
-                if let tweet = sender as? Tweet {
-                    mvc.mentions = [tweet.hashtags]
+                if let cell = sender as? TweetTableViewCell {
+                    if let indexPath = tableView.indexPath(for: cell) {
+                        mvc.tweet = tweets[indexPath.section][indexPath.row]
+                    }
                 }
             }
         }

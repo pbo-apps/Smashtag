@@ -18,6 +18,12 @@ class MentionTableViewController: UITableViewController {
         }
     }
     
+    var tweet: Tweet? {
+        didSet {
+            mentions = [tweet!.hashtags]
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
