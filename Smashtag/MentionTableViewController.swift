@@ -70,8 +70,8 @@ class MentionTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch details[section] {
-        case .Mention(let (name, _)):
-            return name
+        case .Mention(let (name, items)):
+            return items.count > 0 ? name: nil
         }
     }
     
