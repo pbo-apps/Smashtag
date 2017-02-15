@@ -20,9 +20,9 @@ class TweetDetailTableViewController: UITableViewController {
     
     var tweet: Tweet? {
         didSet {
-            details.append(.Mention("Hashtag", tweet!.hashtags))
-            details.append(.Mention("UserMention", tweet!.userMentions))
-            details.append(.Mention("Url", tweet!.urls))
+            details.append(.Mention("Hashtags", tweet!.hashtags))
+            details.append(.Mention("User Mentions", tweet!.userMentions))
+            details.append(.Mention("Links", tweet!.urls))
             details.append(.Media("Images", tweet!.media))
         }
     }
@@ -30,6 +30,22 @@ class TweetDetailTableViewController: UITableViewController {
     private enum TweetDetail {
         case Mention(String, [Mention])
         case Media(String, [MediaItem])
+        
+        var count: Int {
+            switch self {
+            case .Mention(let (_, items)):
+                return items.count
+            case .Media(let (_, items)):
+                return items.count
+            }
+        }
+        
+        var name: String {
+            switch self {
+            case .Mention(let (name, _)), .Media(let (name, _)):
+                return name
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -49,12 +65,7 @@ class TweetDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch details[section] {
-        case .Mention(let (_, items)):
-            return items.count
-        case .Media(let (_, items)):
-            return items.count
-        }
+        return details[section].count
     }
 
     private struct Storyboard {
@@ -75,12 +86,7 @@ class TweetDetailTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch details[section] {
-        case .Mention(let (name, items)):
-            return items.count > 0 ? name : nil
-        case .Media(let (name, items)):
-            return items.count > 0 ? name : nil
-        }
+        return details[section].count > 0 ? details[section].name : nil
     }
     
     /*
