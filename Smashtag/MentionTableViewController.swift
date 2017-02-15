@@ -46,7 +46,7 @@ class MentionTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.MentionCellIdentifier, for: indexPath)
 
         let mention = mentions[indexPath.section][indexPath.row]
-        cell.textLabel?.text = mention.description
+        cell.textLabel?.text = mention.keyword
 
         return cell
     }

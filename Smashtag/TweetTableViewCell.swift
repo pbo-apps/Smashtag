@@ -63,15 +63,16 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     private func setText(for tweet: Twitter.Tweet) {
-        let text = NSMutableAttributedString(string: tweet.text)
-        text.highlight(UIColor.orange, for: tweet.hashtags)
-        text.highlight(UIColor.blue, for: tweet.urls)
-        text.highlight(UIColor.magenta, for: tweet.userMentions)
-        tweetTextLabel!.attributedText = text
+        tweetTextLabel?.text = tweet.text
         if tweetTextLabel?.text != nil {
             for _ in tweet.media {
                 tweetTextLabel.text! += " 📸"
             }
+            let text = NSMutableAttributedString(string: tweetTextLabel.text!)
+            text.highlight(UIColor.orange, for: tweet.hashtags)
+            text.highlight(UIColor.blue, for: tweet.urls)
+            text.highlight(UIColor.magenta, for: tweet.userMentions)
+            tweetTextLabel!.attributedText = text
         }
     }
     
