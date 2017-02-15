@@ -23,11 +23,13 @@ class TweetDetailTableViewController: UITableViewController {
             details.append(.Mention("Hashtag", tweet!.hashtags))
             details.append(.Mention("UserMention", tweet!.userMentions))
             details.append(.Mention("Url", tweet!.urls))
+            details.append(.Media("Images", tweet!.media))
         }
     }
     
     private enum TweetDetail {
         case Mention(String, [Mention])
+        case Media(String, [MediaItem])
     }
     
     override func viewDidLoad() {
@@ -50,6 +52,8 @@ class TweetDetailTableViewController: UITableViewController {
         switch details[section] {
         case .Mention(let (_, items)):
             return items.count
+        case .Media(let (_, items)):
+            return items.count
         }
     }
 
@@ -63,6 +67,8 @@ class TweetDetailTableViewController: UITableViewController {
         switch details[indexPath.section] {
         case .Mention(let (_, items)):
             cell.textLabel?.text = items[indexPath.row].keyword
+        case .Media(let (_, items)):
+            cell.textLabel?.text = items[indexPath.row].description
         }
         
         return cell
@@ -71,7 +77,9 @@ class TweetDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch details[section] {
         case .Mention(let (name, items)):
-            return items.count > 0 ? name: nil
+            return items.count > 0 ? name : nil
+        case .Media(let (name, items)):
+            return items.count > 0 ? name : nil
         }
     }
     
