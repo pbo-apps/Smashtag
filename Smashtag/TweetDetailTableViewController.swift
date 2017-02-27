@@ -70,6 +70,7 @@ class TweetDetailTableViewController: UITableViewController {
 
     private struct Storyboard {
         static let MentionCellIdentifier = "Mention"
+        static let SearchMentionSegueIdentifier = "Search Mention"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,14 +90,24 @@ class TweetDetailTableViewController: UITableViewController {
         return details[section].count > 0 ? details[section].name : nil
     }
     
-    /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == Storyboard.SearchMentionSegueIdentifier {
+            if let ttvc = segue.destination as? TweetTableViewController {
+                if let cell = sender as? UITableViewCell {
+                    if let indexPath = tableView.indexPath(for: cell) {
+                        switch details[indexPath.section] {
+                        case .Mention(let (_, items)):
+                                ttvc.searchText = items[indexPath.row].keyword
+                        default:
+                            break
+                        }
+                    }
+                }
+            }
+        }
     }
-    */
 
 }

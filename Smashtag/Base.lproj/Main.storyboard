@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="58" width="375" height="108"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nrn-c1-iCQ" id="o2B-pm-Sv8">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="107"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4dp-wk-y0N">
@@ -58,13 +58,13 @@
                                                     <rect key="frame" x="70" y="0.0" width="289" height="92"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="300" text="Tweeter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVa-Ut-JRh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="289" height="21"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="289" height="20.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Taz-3d-bW9">
-                                                            <rect key="frame" x="0.0" y="21" width="289" height="71"/>
+                                                            <rect key="frame" x="0.0" y="20.5" width="289" height="71.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -144,6 +144,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="hj2-7c-mdt" kind="show" identifier="Search Mention" id="6qI-DX-dJe"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -154,7 +157,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eaX-rO-qQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1565.5999999999999" y="100.29985007496252"/>
+            <point key="canvasLocation" x="1706" y="101"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NyM-6d-Dqo">
@@ -175,4 +178,7 @@
             <point key="canvasLocation" x="-162.40000000000001" y="101.19940029985008"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="6qI-DX-dJe"/>
+    </inferredMetricsTieBreakers>
 </document>
