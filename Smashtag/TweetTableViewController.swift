@@ -65,12 +65,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     // MARK: - Table view data source
@@ -97,6 +91,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return tweets[indexPath.section][indexPath.row].hasDetails()
     }
     
     @IBOutlet weak var searchTextField: UITextField! {
@@ -130,4 +128,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
 
+}
+
+private extension Tweet {
+    func hasDetails() -> Bool {
+        return !self.media.isEmpty || !self.hashtags.isEmpty || !self.userMentions.isEmpty || !self.urls.isEmpty
+    }
 }
