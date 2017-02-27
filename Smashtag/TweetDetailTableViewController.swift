@@ -90,21 +90,31 @@ class TweetDetailTableViewController: UITableViewController {
         return details[section].count > 0 ? details[section].name : nil
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch details[indexPath.section] {
+        case .Mention(let (name, items)):
+            switch name {
+            case "Links":
+                if let url = URL(string: items[indexPath.row].keyword) {
+                    UIApplication.shared.open(url)
+                }
+            default:
+                performSegue(withIdentifier: Storyboard.SearchMentionSegueIdentifier, sender: items[indexPath.row])
+            }
+        case .Media(let (_, items)):
+            UIApplication.shared.open(items[indexPath.row].url)
+        }
+        
+    }
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Storyboard.SearchMentionSegueIdentifier {
             if let ttvc = segue.destination as? TweetTableViewController {
-                if let cell = sender as? UITableViewCell {
-                    if let indexPath = tableView.indexPath(for: cell) {
-                        switch details[indexPath.section] {
-                        case .Mention(let (_, items)):
-                                ttvc.searchText = items[indexPath.row].keyword
-                        default:
-                            break
-                        }
-                    }
+                if let mention = sender as? Mention {
+                    ttvc.searchText = mention.keyword
                 }
             }
         }

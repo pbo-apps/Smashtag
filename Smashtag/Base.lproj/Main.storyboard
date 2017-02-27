@@ -132,11 +132,11 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="47"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A0k-h9-HMT" id="Rrd-SN-41F">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="46.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Atf-7j-L9P">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="46"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="46.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -144,9 +144,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="hj2-7c-mdt" kind="show" identifier="Search Mention" id="6qI-DX-dJe"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -154,6 +151,9 @@
                             <outlet property="delegate" destination="DET-VT-e7H" id="T8d-wq-9uA"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="hj2-7c-mdt" kind="show" identifier="Search Mention" id="UUF-2q-xLB"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eaX-rO-qQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -179,6 +179,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6qI-DX-dJe"/>
+        <segue reference="UUF-2q-xLB"/>
     </inferredMetricsTieBreakers>
 </document>
