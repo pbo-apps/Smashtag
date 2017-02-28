@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="58" width="375" height="108"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nrn-c1-iCQ" id="o2B-pm-Sv8">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="107"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4dp-wk-y0N">
@@ -145,6 +145,28 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Media" rowHeight="94" id="3hs-5B-vdE" customClass="MediaTableViewCell" customModule="Smashtag" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="75" width="375" height="94"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3hs-5B-vdE" id="vb9-nY-oPH">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3BC-t8-g0L">
+                                            <rect key="frame" x="8" y="8" width="359" height="77.5"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="3BC-t8-g0L" secondAttribute="bottom" id="3Xc-df-Kw9"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="3BC-t8-g0L" secondAttribute="trailing" id="VGj-be-mt4"/>
+                                        <constraint firstAttribute="topMargin" secondItem="3BC-t8-g0L" secondAttribute="top" id="bFJ-G1-pdT"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="3BC-t8-g0L" secondAttribute="leading" id="qQG-c1-lvf"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="tweetImageView" destination="3BC-t8-g0L" id="4iv-Wn-uxp"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="DET-VT-e7H" id="qYB-PX-6iX"/>
@@ -157,7 +179,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eaX-rO-qQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1706" y="101"/>
+            <point key="canvasLocation" x="1704.8" y="100.29985007496252"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="mN2-Lz-0a4">

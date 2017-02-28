@@ -18,6 +18,7 @@
 		A1B471D41E53562F0067CA9E /* TweetDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B471D31E53562F0067CA9E /* TweetDetailTableViewController.swift */; };
 		A1F3E0701E64654900F46610 /* RecentSearchTerms.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F3E06F1E64654900F46610 /* RecentSearchTerms.swift */; };
 		A1F3E0721E6476FF00F46610 /* SearchHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F3E0711E6476FF00F46610 /* SearchHistoryTableViewController.swift */; };
+		A1F3E0741E65623B00F46610 /* MediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F3E0731E65623B00F46610 /* MediaTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +48,7 @@
 		A1B471D31E53562F0067CA9E /* TweetDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailTableViewController.swift; sourceTree = "<group>"; };
 		A1F3E06F1E64654900F46610 /* RecentSearchTerms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentSearchTerms.swift; sourceTree = "<group>"; };
 		A1F3E0711E6476FF00F46610 /* SearchHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewController.swift; sourceTree = "<group>"; };
+		A1F3E0731E65623B00F46610 /* MediaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				A1B471BC1E5204610067CA9E /* Main.storyboard */,
+				A1F3E0731E65623B00F46610 /* MediaTableViewCell.swift */,
 				A1F3E0711E6476FF00F46610 /* SearchHistoryTableViewController.swift */,
 				A1B471D31E53562F0067CA9E /* TweetDetailTableViewController.swift */,
 				A1B471D11E52EFAD0067CA9E /* TweetTableViewCell.swift */,
@@ -182,6 +185,7 @@
 				A1B471D41E53562F0067CA9E /* TweetDetailTableViewController.swift in Sources */,
 				A1B471B91E5204610067CA9E /* AppDelegate.swift in Sources */,
 				A1B471CC1E5206ED0067CA9E /* TweetTableViewController.swift in Sources */,
+				A1F3E0741E65623B00F46610 /* MediaTableViewCell.swift in Sources */,
 				A1B471D21E52EFAD0067CA9E /* TweetTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

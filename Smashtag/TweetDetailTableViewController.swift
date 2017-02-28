@@ -50,7 +50,7 @@ class TweetDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -70,20 +70,21 @@ class TweetDetailTableViewController: UITableViewController {
 
     private struct Storyboard {
         static let MentionCellIdentifier = "Mention"
+        static let MediaCellIdentifier = "Media"
         static let SearchMentionSegueIdentifier = "Search Mention"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.MentionCellIdentifier, for: indexPath)
-
         switch details[indexPath.section] {
         case .Mention(let (_, items)):
+            let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.MentionCellIdentifier, for: indexPath)
             cell.textLabel?.text = items[indexPath.row].keyword
+            return cell
         case .Media(let (_, items)):
-            cell.textLabel?.text = items[indexPath.row].description
+            let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.MediaCellIdentifier, for: indexPath) as! MediaTableViewCell
+            cell.media = items[indexPath.row]
+            return cell
         }
-        
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -105,6 +106,15 @@ class TweetDetailTableViewController: UITableViewController {
             UIApplication.shared.open(items[indexPath.row].url)
         }
         
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch details[indexPath.section] {
+        case .Mention:
+            return UITableViewAutomaticDimension
+        case .Media(let (_,items)):
+            return tableView.bounds.width / CGFloat(items[indexPath.row].aspectRatio)
+        }
     }
     
     // MARK: - Navigation
