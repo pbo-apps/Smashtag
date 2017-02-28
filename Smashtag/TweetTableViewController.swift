@@ -1,4 +1,4 @@
- //
+//
 //  TweetTableViewController.swift
 //  Smashtag
 //
@@ -24,7 +24,8 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             tweets.removeAll()
             lastTwitterRequest = nil
             searchForTweets()
-            title = searchText
+            navigationItem.title = searchText
+            RecentSearchTerms.add(searchText!)
         }
     }
     
@@ -65,12 +66,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     // MARK: - Table view data source
@@ -85,6 +80,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
 
     private struct Storyboard {
         static let TweetCellIdentifier = "Tweet"
+        static let ViewTweetSegueIdentifier = "View Tweet"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -96,6 +92,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return tweets[indexPath.section][indexPath.row].hasDetails()
     }
     
     @IBOutlet weak var searchTextField: UITextField! {
@@ -111,14 +111,28 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         return true
     }
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == Storyboard.ViewTweetSegueIdentifier {
+            if let tdtvc = segue.destination as? TweetDetailTableViewController {
+                if let cell = sender as? TweetTableViewCell {
+                    if let indexPath = tableView.indexPath(for: cell) {
+                        tdtvc.tweet = tweets[indexPath.section][indexPath.row]
+                    }
+                }
+            }
+        }
+        
     }
-    */
 
+}
+
+private extension Tweet {
+    func hasDetails() -> Bool {
+        return !self.media.isEmpty || !self.hashtags.isEmpty || !self.userMentions.isEmpty || !self.urls.isEmpty
+    }
 }

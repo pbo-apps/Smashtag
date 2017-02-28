@@ -27,29 +27,64 @@ class TweetTableViewCell: UITableViewCell {
         
         // load new information from our tweet (if any)
         if let tweet = self.tweet {
-            tweetTextLabel?.text = tweet.text
-            if tweetTextLabel?.text != nil {
-                for _ in tweet.media {
-                    tweetTextLabel.text! += " "
-                }
-            }
-            
-            tweetScreenNameLabel?.text = "\(tweet.user)" // tweet.user.description
-            
-            if let profileImageURL = tweet.user.profileImageURL {
-                if let imageData = NSData(contentsOf: profileImageURL) { // blocks main thread!!
-                    tweetProfileImageView?.image = UIImage(data: imageData as Data)
-                }
-            }
-            
-            let formatter = DateFormatter()
-            if NSDate().timeIntervalSince(tweet.created) > 24*60*60 {
-                formatter.dateStyle = DateFormatter.Style.short
-            } else {
-                formatter.timeStyle = DateFormatter.Style.short
-            }
-            tweetCreatedLabel?.text = formatter.string(from: tweet.created)
+            setText(for: tweet)
+            setName(for: tweet)
+            fetchProfileImage(for: tweet)
+            setCreatedDateTime(for: tweet)
         }
         
+    }
+    
+    private func fetchProfileImage(for tweet: Twitter.Tweet) {
+        if let profileImageURL = tweet.user.profileImageURL {
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
+                let contentsOfURL = NSData(contentsOf: profileImageURL)
+                DispatchQueue.main.async { [weak weakSelf = self] in
+                    if profileImageURL == weakSelf?.tweet?.user.profileImageURL {
+                        if let imageData = contentsOfURL {
+                            weakSelf?.tweetProfileImageView?.image = UIImage(data: imageData as Data)
+                        }
+                    } else {
+                        print("ignored data returned from url \(profileImageURL)")
+                    }
+                }
+            }
+        }
+    }
+    
+    private func setCreatedDateTime(for tweet: Twitter.Tweet) {
+        let formatter = DateFormatter()
+        if NSDate().timeIntervalSince(tweet.created) > 24*60*60 {
+            formatter.dateStyle = DateFormatter.Style.short
+        } else {
+            formatter.timeStyle = DateFormatter.Style.short
+        }
+        tweetCreatedLabel?.text = formatter.string(from: tweet.created)
+    }
+    
+    private func setText(for tweet: Twitter.Tweet) {
+        tweetTextLabel?.text = tweet.text
+        if tweetTextLabel?.text != nil {
+            for _ in tweet.media {
+                tweetTextLabel.text! += " 📸"
+            }
+            let text = NSMutableAttributedString(string: tweetTextLabel.text!)
+            text.highlight(UIColor.orange, for: tweet.hashtags)
+            text.highlight(UIColor.blue, for: tweet.urls)
+            text.highlight(UIColor.magenta, for: tweet.userMentions)
+            tweetTextLabel!.attributedText = text
+        }
+    }
+    
+    private func setName(for tweet: Twitter.Tweet) {
+        tweetScreenNameLabel?.text = "\(tweet.user)" // tweet.user.description
+    }
+}
+
+private extension NSMutableAttributedString {
+    func highlight(_ color: UIColor, for mentions: [Mention]) {
+        for mention in mentions {
+            self.addAttribute(NSForegroundColorAttributeName, value: color, range: mention.nsrange)
+        }
     }
 }
