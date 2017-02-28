@@ -22,6 +22,8 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    var aspectRatio: Double?
+    
     private func fetchImage() {
         if let url = imageURL {
             spinner?.startAnimating()
@@ -65,7 +67,12 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
             return imageView.image
         }
         set {
+//            newValue.
+//            if aspectRatio != nil {
+//                let height = scrollView?.bounds.width / CGFloat(aspectRatio!)
+//            }
             imageView.image = newValue
+            //imageView.sizeThatFits(CGSize(width: 100, height: 100))
             imageView.sizeToFit()
             // scrollView is an outlet, so we need to allow for case where this is nil (i.e. image setting is happening when someone is preparing this MVC to be segued to)
             scrollView?.contentSize = imageView.frame.size
@@ -85,4 +92,10 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    var userDidZoom = false
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        userDidZoom = true
+    }
+
 }

@@ -117,7 +117,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NjD-sC-9Mu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="776.79999999999995" y="101.19940029985008"/>
+            <point key="canvasLocation" x="902" y="440"/>
         </scene>
         <!--Tweet Detail Table View Controller-->
         <scene sceneID="s8V-M0-K8P">
@@ -180,7 +180,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eaX-rO-qQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1704.8" y="100.29985007496252"/>
+            <point key="canvasLocation" x="1657" y="439"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="q08-NH-6Xa">
@@ -195,10 +195,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8aJ-iZ-O3x">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="zd9-iu-imq">
-                                        <rect key="frame" x="169" y="305" width="37" height="37"/>
+                                        <rect key="frame" x="169" y="258.5" width="37" height="37"/>
                                         <color key="color" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -225,7 +225,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NVh-zR-kvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2781.5999999999999" y="99.400299850074973"/>
+            <point key="canvasLocation" x="2434" y="439"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="mN2-Lz-0a4">
@@ -262,7 +262,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hJc-fQ-8Kg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-162.40000000000001" y="101.19940029985008"/>
+            <point key="canvasLocation" x="-983" y="101"/>
         </scene>
         <!--Search History Table View Controller-->
         <scene sceneID="cUv-j1-piu">
@@ -297,10 +297,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="QgR-5E-pdH"/>
+                    <connections>
+                        <segue destination="hj2-7c-mdt" kind="show" identifier="Search Historic Term" id="hq4-1m-dXI"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L7h-4c-NEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="777" y="913"/>
+            <point key="canvasLocation" x="-148" y="913"/>
         </scene>
         <!--History-->
         <scene sceneID="K2L-27-Kfo">
@@ -319,10 +322,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTK-eM-4z3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-162" y="913"/>
+            <point key="canvasLocation" x="-983" y="913"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UUF-2q-xLB"/>
+        <segue reference="hq4-1m-dXI"/>
     </inferredMetricsTieBreakers>
 </document>
