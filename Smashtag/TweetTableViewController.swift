@@ -24,7 +24,8 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             tweets.removeAll()
             lastTwitterRequest = nil
             searchForTweets()
-            title = searchText
+            navigationItem.title = searchText
+            RecentSearchTerms.add(searchText!)
         }
     }
     
