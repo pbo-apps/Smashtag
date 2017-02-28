@@ -245,11 +245,11 @@
             </objects>
             <point key="canvasLocation" x="-1924" y="538"/>
         </scene>
-        <!--Search-->
+        <!--Navigation Controller-->
         <scene sceneID="NyM-6d-Dqo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rzH-ke-17p" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" id="rva-W2-d13"/>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="rva-W2-d13"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lhl-Kt-rZw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -305,11 +305,11 @@
             </objects>
             <point key="canvasLocation" x="-148" y="913"/>
         </scene>
-        <!--History-->
+        <!--Navigation Controller-->
         <scene sceneID="K2L-27-Kfo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PJh-f5-5MI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="History" id="Kmf-1W-XTt"/>
+                    <tabBarItem key="tabBarItem" systemItem="history" id="Kmf-1W-XTt"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zrC-E8-wXD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -326,6 +326,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hq4-1m-dXI"/>
+        <segue reference="eSR-Di-yfQ"/>
     </inferredMetricsTieBreakers>
 </document>
