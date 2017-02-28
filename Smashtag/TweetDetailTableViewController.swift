@@ -72,6 +72,7 @@ class TweetDetailTableViewController: UITableViewController {
         static let MentionCellIdentifier = "Mention"
         static let MediaCellIdentifier = "Media"
         static let SearchMentionSegueIdentifier = "Search Mention"
+        static let ViewImageSegueIdentifier = "View Image"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -103,7 +104,7 @@ class TweetDetailTableViewController: UITableViewController {
                 performSegue(withIdentifier: Storyboard.SearchMentionSegueIdentifier, sender: items[indexPath.row])
             }
         case .Media(let (_, items)):
-            UIApplication.shared.open(items[indexPath.row].url)
+            performSegue(withIdentifier: Storyboard.ViewImageSegueIdentifier, sender: items[indexPath.row])
         }
         
     }
@@ -121,12 +122,21 @@ class TweetDetailTableViewController: UITableViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Storyboard.SearchMentionSegueIdentifier {
+        switch segue.identifier! {
+        case Storyboard.SearchMentionSegueIdentifier:
             if let ttvc = segue.destination as? TweetTableViewController {
                 if let mention = sender as? Mention {
                     ttvc.searchText = mention.keyword
                 }
             }
+        case Storyboard.ViewImageSegueIdentifier:
+            if let ivc = segue.destination as? ImageViewController {
+                if let media = sender as? MediaItem {
+                    ivc.imageURL = media.url
+                }
+            }
+        default:
+            break
         }
     }
 

@@ -175,11 +175,57 @@
                     </tableView>
                     <connections>
                         <segue destination="hj2-7c-mdt" kind="show" identifier="Search Mention" id="UUF-2q-xLB"/>
+                        <segue destination="xHo-R3-yVz" kind="show" identifier="View Image" id="9mf-dG-IZ4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eaX-rO-qQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1704.8" y="100.29985007496252"/>
+        </scene>
+        <!--Image View Controller-->
+        <scene sceneID="q08-NH-6Xa">
+            <objects>
+                <viewController id="xHo-R3-yVz" customClass="ImageViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VYp-FC-YHi"/>
+                        <viewControllerLayoutGuide type="bottom" id="8AB-6T-Dga"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="f8T-hQ-wcd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8aJ-iZ-O3x">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="zd9-iu-imq">
+                                        <rect key="frame" x="169" y="305" width="37" height="37"/>
+                                        <color key="color" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="zd9-iu-imq" secondAttribute="bottom" constant="305" id="VJV-aP-y87"/>
+                                    <constraint firstAttribute="trailing" secondItem="zd9-iu-imq" secondAttribute="trailing" constant="169" id="mPa-YJ-7tn"/>
+                                    <constraint firstItem="zd9-iu-imq" firstAttribute="centerX" secondItem="8aJ-iZ-O3x" secondAttribute="centerX" id="s0g-Qy-d2r"/>
+                                    <constraint firstItem="zd9-iu-imq" firstAttribute="centerY" secondItem="8aJ-iZ-O3x" secondAttribute="centerY" id="sgW-3o-BeB"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="8aJ-iZ-O3x" secondAttribute="trailing" id="IhT-56-xul"/>
+                            <constraint firstItem="8aJ-iZ-O3x" firstAttribute="leading" secondItem="f8T-hQ-wcd" secondAttribute="leading" id="Iwx-dU-Ych"/>
+                            <constraint firstItem="8aJ-iZ-O3x" firstAttribute="top" secondItem="VYp-FC-YHi" secondAttribute="bottom" id="dsz-Ol-Eyo"/>
+                            <constraint firstItem="8aJ-iZ-O3x" firstAttribute="bottom" secondItem="8AB-6T-Dga" secondAttribute="top" id="e8U-pG-YcE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scrollView" destination="8aJ-iZ-O3x" id="eFr-VU-5Nl"/>
+                        <outlet property="spinner" destination="zd9-iu-imq" id="Zip-ae-MMu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NVh-zR-kvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2781.5999999999999" y="99.400299850074973"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="mN2-Lz-0a4">
