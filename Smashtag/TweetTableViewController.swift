@@ -8,12 +8,15 @@
 
 import UIKit
 import Twitter
+import CoreData
 
 class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     // MARK: - Model
     
-    var tweets = [Array<Tweet>]() {
+    var tweetContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    
+    var tweets = [Array<Twitter.Tweet>]() {
         didSet {
             tableView.reloadData()
         }
@@ -48,6 +51,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                     if request == weakSelf?.lastTwitterRequest {
                         if !newTweets.isEmpty {
                             weakSelf?.tweets.insert(newTweets, at: 0)
+                            weakSelf?.updateDatabase(with: newTweets)
                         }
                     }
                     weakSelf?.refreshControl?.endRefreshing()
@@ -55,6 +59,15 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             }
         } else {
             self.refreshControl?.endRefreshing()
+        }
+    }
+    
+    private func updateDatabase(with newTweets: [Twitter.Tweet]) {
+        //var tweet = Model.Tweet(context: tweetContainer.viewContext)
+        tweetContainer.viewContext.perform {
+            for twitterInfo in newTweets {
+                _ = Tweet.create(from: twitterInfo, for: self.tweetContainer.viewContext)
+            }
         }
     }
     
@@ -81,6 +94,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     private struct Storyboard {
         static let TweetCellIdentifier = "Tweet"
         static let ViewTweetSegueIdentifier = "View Tweet"
+        static let ViewTweetersSegueIdentifier = "Tweeters Mentioning Search Term"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,9 +129,8 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if segue.identifier == Storyboard.ViewTweetSegueIdentifier {
+        switch segue.identifier! {
+        case Storyboard.ViewTweetSegueIdentifier:
             if let tdtvc = segue.destination as? TweetDetailTableViewController {
                 if let cell = sender as? TweetTableViewCell {
                     if let indexPath = tableView.indexPath(for: cell) {
@@ -125,13 +138,15 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                     }
                 }
             }
+        default:
+            break
         }
         
     }
 
 }
 
-private extension Tweet {
+private extension Twitter.Tweet {
     func hasDetails() -> Bool {
         return !self.media.isEmpty || !self.hashtags.isEmpty || !self.userMentions.isEmpty || !self.urls.isEmpty
     }
