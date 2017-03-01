@@ -155,6 +155,11 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                     }
                 }
             }
+        case Storyboard.ViewTweetersSegueIdentifier:
+            if let tweetersTVC = segue.destination as? TweetersTableViewController {
+                tweetersTVC.mention = searchText
+                tweetersTVC.managedObjectContext = tweetContainer.viewContext
+            }
         default:
             break
         }
