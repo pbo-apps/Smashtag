@@ -35,6 +35,16 @@ class TweetersTableViewController: CoreDataTableViewController<TwitterUser> {
         }
     }
     
+    private func tweetCountWithMention(by user: TwitterUser) -> Int? {
+        var count: Int?
+        user.managedObjectContext?.performAndWait {
+            let request: NSFetchRequest<Tweet> = Tweet.fetchRequest()
+            request.predicate = NSPredicate(format: "text contains[c] %@ and tweeter = %@", self.mention!, user)
+            try? count = user.managedObjectContext?.count(for: request)
+        }
+        return count
+    }
+    
     // MARK: - Table view data source
     
     private struct Storyboard {
@@ -50,6 +60,11 @@ class TweetersTableViewController: CoreDataTableViewController<TwitterUser> {
                 screenName = twitterUser.screenName
             }
             cell.textLabel?.text = screenName
+            if let count = tweetCountWithMention(by: twitterUser) {
+                cell.detailTextLabel?.text = (count == 1) ? "1 tweet" : "\(count) tweets"
+            } else {
+                cell.detailTextLabel?.text = ""
+            }
         }
 
         return cell
