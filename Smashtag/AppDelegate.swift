@@ -18,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // Adding the TVC instantiation here because the first time this is loaded it fails to recognise the generic class type
+        // Doing it here ensures that it only happens once
+        // Instanciating it with no arguments is very lightweight as it won't load any views (because it has no information about where to load them from)
+        _ = TweetersTableViewController()
         return true
     }
 
