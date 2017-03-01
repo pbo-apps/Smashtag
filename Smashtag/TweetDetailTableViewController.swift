@@ -18,7 +18,7 @@ class TweetDetailTableViewController: UITableViewController {
         }
     }
     
-    var tweet: Tweet? {
+    var tweet: Twitter.Tweet? {
         didSet {
             details.append(.Mention("Hashtags", tweet!.hashtags))
             details.append(.Mention("User Mentions", tweet!.userMentions))

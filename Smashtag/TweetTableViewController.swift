@@ -8,12 +8,15 @@
 
 import UIKit
 import Twitter
+import CoreData
 
 class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     // MARK: - Model
     
-    var tweets = [Array<Tweet>]() {
+    var tweetContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    
+    var tweets = [Array<Twitter.Tweet>]() {
         didSet {
             tableView.reloadData()
         }
@@ -48,6 +51,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                     if request == weakSelf?.lastTwitterRequest {
                         if !newTweets.isEmpty {
                             weakSelf?.tweets.insert(newTweets, at: 0)
+                            weakSelf?.updateDatabase(with: newTweets)
                         }
                     }
                     weakSelf?.refreshControl?.endRefreshing()
@@ -55,6 +59,32 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             }
         } else {
             self.refreshControl?.endRefreshing()
+        }
+    }
+    
+    private func updateDatabase(with newTweets: [Twitter.Tweet]) {
+        //var tweet = Model.Tweet(context: tweetContainer.viewContext)
+        tweetContainer.viewContext.perform {
+            for twitterInfo in newTweets {
+                _ = Tweet.create(from: twitterInfo, for: self.tweetContainer.viewContext)
+            }
+        }
+        printDatabaseStatistics()
+        print("Done printing database statistics")
+    }
+    
+    private func printDatabaseStatistics() {
+        tweetContainer.viewContext.perform {
+            // This is an inefficient way of counting, as it fetches husks of all the data rows and then counts on the code-side
+            let request: NSFetchRequest<TwitterUser> = TwitterUser.fetchRequest()
+            if let results = try? self.tweetContainer.viewContext.fetch(request) {
+                print("\(results.count) TwitterUsers")
+            }
+            // This is a more efficient way of counting, as the count happens on the DB side and only the integer number is returned
+            let requestTweetCount: NSFetchRequest<Tweet> = Tweet.fetchRequest()
+            if let tweetCount = try? self.tweetContainer.viewContext.count(for: requestTweetCount) {
+                print("\(tweetCount) Tweets")
+            }
         }
     }
     
@@ -81,6 +111,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     private struct Storyboard {
         static let TweetCellIdentifier = "Tweet"
         static let ViewTweetSegueIdentifier = "View Tweet"
+        static let ViewTweetersSegueIdentifier = "Tweeters Mentioning Search Term"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,9 +146,8 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if segue.identifier == Storyboard.ViewTweetSegueIdentifier {
+        switch segue.identifier! {
+        case Storyboard.ViewTweetSegueIdentifier:
             if let tdtvc = segue.destination as? TweetDetailTableViewController {
                 if let cell = sender as? TweetTableViewCell {
                     if let indexPath = tableView.indexPath(for: cell) {
@@ -125,13 +155,20 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                     }
                 }
             }
+        case Storyboard.ViewTweetersSegueIdentifier:
+            if let tweetersTVC = segue.destination as? TweetersTableViewController {
+                tweetersTVC.mention = searchText
+                tweetersTVC.managedObjectContext = tweetContainer.viewContext
+            }
+        default:
+            break
         }
         
     }
 
 }
 
-private extension Tweet {
+private extension Twitter.Tweet {
     func hasDetails() -> Bool {
         return !self.media.isEmpty || !self.hashtags.isEmpty || !self.userMentions.isEmpty || !self.urls.isEmpty
     }
