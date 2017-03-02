@@ -12,6 +12,12 @@ import CoreData
 
 class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
+    private struct Storyboard {
+        static let TweetCellIdentifier = "Tweet"
+        static let ViewTweetSegueIdentifier = "View Tweet"
+        static let ViewTweetersSegueIdentifier = "Tweeters Mentioning Search Term"
+    }
+    
     // MARK: - Model
     
     var tweetContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
@@ -108,11 +114,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         return tweets[section].count
     }
 
-    private struct Storyboard {
-        static let TweetCellIdentifier = "Tweet"
-        static let ViewTweetSegueIdentifier = "View Tweet"
-        static let ViewTweetersSegueIdentifier = "Tweeters Mentioning Search Term"
-    }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.TweetCellIdentifier, for: indexPath)

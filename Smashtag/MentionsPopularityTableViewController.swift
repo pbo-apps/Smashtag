@@ -7,36 +7,53 @@
 //
 
 import UIKit
+import CoreData
 
-class MentionsPopularityTableViewController: UITableViewController {
-
-    // MARK: - Model
-    var searchText: String? { didSet { updateUI() } }
+class MentionsPopularityTableViewController: CoreDataTableViewController<Tweet> {
     
-    private func updateUI() {
-        // Will need to create the fetch request controller here
-    }
-
     private struct Storyboard {
         static let mentionCell = "Mention Popularity Cell"
     }
     
+    // MARK: - Model
+    var searchText: String? { didSet { updateUI() } }
+    var managedObjectContext: NSManagedObjectContext? { didSet { updateUI() } }
+    
+    private func updateUI() {
+        if let context = managedObjectContext, searchText != nil, searchText!.characters.count > 0 {
+            let request: NSFetchRequest<Tweet> = Tweet.fetchRequest()
+            //request.predicate = NSPredicate(format: "", <#T##args: CVarArg...##CVarArg#>)
+            request.sortDescriptors = [NSSortDescriptor(
+                key: "posted",
+                ascending: false
+                )]
+            fetchedResultsController = NSFetchedResultsController<Tweet>(
+                fetchRequest: request,
+                managedObjectContext: context,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
+        } else {
+            fetchedResultsController = nil
+        }
+    }
+    
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
-    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.mentionCell, for: indexPath)
 
-        cell.textLabel?.text = searchText
+        if let tweet = fetchedResultsController?.object(at: indexPath) {
+            var tweeterName: String?
+            var postedDate: Date?
+            tweet.managedObjectContext?.performAndWait {
+                tweeterName = tweet.tweeter?.screenName
+                postedDate = tweet.posted as? Date
+            }
+            cell.textLabel?.text = tweeterName
+            cell.detailTextLabel?.text = postedDate?.formatForTweet()
+            
+        }
 
         return cell
     }

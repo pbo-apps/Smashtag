@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Doing it here ensures that it only happens once
         // Instanciating it with no arguments is very lightweight as it won't load any views (because it has no information about where to load them from)
         _ = TweetersTableViewController()
+        _ = MentionsPopularityTableViewController()
         return true
     }
 

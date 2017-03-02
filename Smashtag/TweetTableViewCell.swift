@@ -53,13 +53,7 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     private func setCreatedDateTime(for tweet: Twitter.Tweet) {
-        let formatter = DateFormatter()
-        if NSDate().timeIntervalSince(tweet.created) > 24*60*60 {
-            formatter.dateStyle = DateFormatter.Style.short
-        } else {
-            formatter.timeStyle = DateFormatter.Style.short
-        }
-        tweetCreatedLabel?.text = formatter.string(from: tweet.created)
+        tweetCreatedLabel?.text = tweet.created.formatForTweet()
     }
     
     private func setText(for tweet: Twitter.Tweet) {
