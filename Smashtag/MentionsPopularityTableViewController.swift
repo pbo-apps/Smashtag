@@ -23,7 +23,7 @@ class MentionsPopularityTableViewController: CoreDataTableViewController<Mention
         if let context = managedObjectContext, searchText != nil, searchText!.characters.count > 0 {
             self.navigationItem.title = "Mentions related to " + searchText!
             let request: NSFetchRequest<Mention> = Mention.fetchRequest()
-            request.predicate = NSPredicate(format: "any tweets.text contains[c] %@", searchText!)
+            request.predicate = NSPredicate(format: "any tweets.text contains[c] %@ and count > %@", searchText!, NSNumber(value: 1))
             request.sortDescriptors = [NSSortDescriptor(
                 key: "count",
                 ascending: false
