@@ -13,6 +13,7 @@ class SearchHistoryTableViewController: UITableViewController {
     private struct Storyboard {
         static let searchTermCell = "Search Term Cell"
         static let searchHistoricTermSegueIdentifier = "Search Historic Term"
+        static let mentionsPopularitySegueIdentifier = "View Search Term Mentions By Popularity"
     }
     
     override func viewDidLoad() {
@@ -95,10 +96,17 @@ class SearchHistoryTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Storyboard.searchHistoricTermSegueIdentifier {
+        switch segue.identifier! {
+        case Storyboard.searchHistoricTermSegueIdentifier:
             if let ttvc = segue.destination as? TweetTableViewController {
                 ttvc.searchText = sender as? String
             }
+        case Storyboard.mentionsPopularitySegueIdentifier:
+            if let mptvc = segue.destination as? MentionsPopularityTableViewController, let cell = sender as? UITableViewCell {
+                mptvc.searchText = cell.textLabel?.text
+            }
+        default:
+            break
         }
     }
 

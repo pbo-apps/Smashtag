@@ -279,15 +279,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Search Term Cell" textLabel="zQV-NE-rLI" rowHeight="47" style="IBUITableViewCellStyleDefault" id="b2F-Xk-I78">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="Search Term Cell" textLabel="zQV-NE-rLI" rowHeight="47" style="IBUITableViewCellStyleDefault" id="b2F-Xk-I78">
                                 <rect key="frame" x="0.0" y="28" width="375" height="47"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b2F-Xk-I78" id="3qy-09-qpR">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="308" height="46"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zQV-NE-rLI">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="46"/>
+                                            <rect key="frame" x="15" y="0.0" width="293" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -295,6 +295,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="cyX-DH-XFU" kind="show" identifier="View Search Term Mentions By Popularity" trigger="accessoryAction" id="s6z-NA-6Ol"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -310,6 +313,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L7h-4c-NEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-148" y="913"/>
+        </scene>
+        <!--Mentions Popularity Table View Controller-->
+        <scene sceneID="KUU-wp-yQs">
+            <objects>
+                <tableViewController id="cyX-DH-XFU" customClass="MentionsPopularityTableViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="TMn-wx-vcX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Mention Popularity Cell" textLabel="kdH-W2-Tnc" detailTextLabel="i55-nt-D9G" style="IBUITableViewCellStyleSubtitle" id="lYE-lQ-kNI">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lYE-lQ-kNI" id="A4V-aF-o0M">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kdH-W2-Tnc">
+                                            <rect key="frame" x="15" y="4" width="34" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i55-nt-D9G">
+                                            <rect key="frame" x="15" y="25" width="44" height="15"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="cyX-DH-XFU" id="aCq-6R-r3P"/>
+                            <outlet property="delegate" destination="cyX-DH-XFU" id="Jbd-wK-P8w"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rxf-EO-PdO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="638" y="913"/>
         </scene>
         <!--Tweeters Table View Controller-->
         <scene sceneID="uYJ-Ei-40x">
@@ -353,7 +400,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DDQ-VH-JDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1398" y="-644"/>
+            <point key="canvasLocation" x="1398" y="-672"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="K2L-27-Kfo">
@@ -376,6 +423,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="eSR-Di-yfQ"/>
+        <segue reference="hq4-1m-dXI"/>
     </inferredMetricsTieBreakers>
 </document>
