@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MentionsPopularityTableViewController: CoreDataTableViewController<Tweet> {
+class MentionsPopularityTableViewController: CoreDataTableViewController<Mention> {
     
     private struct Storyboard {
         static let mentionCell = "Mention Popularity Cell"
@@ -21,21 +21,26 @@ class MentionsPopularityTableViewController: CoreDataTableViewController<Tweet> 
     
     private func updateUI() {
         if let context = managedObjectContext, searchText != nil, searchText!.characters.count > 0 {
-            self.navigationItem.title = "Tweets containing " + searchText!
-            let request: NSFetchRequest<Tweet> = Tweet.fetchRequest()
-            request.predicate = NSPredicate(format: "text contains[c] %@", searchText!)
+            self.navigationItem.title = "Mentions related to " + searchText!
+            let request: NSFetchRequest<Mention> = Mention.fetchRequest()
+            request.predicate = NSPredicate(format: "any tweets.text contains[c] %@", searchText!)
             request.sortDescriptors = [NSSortDescriptor(
-                key: "posted",
+                key: "count",
                 ascending: false
+                ),
+                NSSortDescriptor(
+                    key: "name",
+                    ascending: true,
+                    selector: #selector(NSString.localizedCaseInsensitiveCompare(_:))
                 )]
-            fetchedResultsController = NSFetchedResultsController<Tweet>(
+            fetchedResultsController = NSFetchedResultsController<Mention>(
                 fetchRequest: request,
                 managedObjectContext: context,
                 sectionNameKeyPath: nil,
                 cacheName: nil
             )
         } else {
-            self.navigationItem.title = "No tweets to display"
+            self.navigationItem.title = "No mentions to display"
             fetchedResultsController = nil
         }
     }
@@ -45,16 +50,15 @@ class MentionsPopularityTableViewController: CoreDataTableViewController<Tweet> 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.mentionCell, for: indexPath)
 
-        if let tweet = fetchedResultsController?.object(at: indexPath) {
-            var tweeterName: String?
-            var postedDate: Date?
-            tweet.managedObjectContext?.performAndWait {
-                tweeterName = tweet.tweeter?.screenName
-                postedDate = tweet.posted as? Date
+        if let mention = fetchedResultsController?.object(at: indexPath) {
+            var mentionName: String?
+            var mentionedInCount: Int?
+            mention.managedObjectContext?.performAndWait {
+                mentionName = mention.name
+                mentionedInCount = mention.tweets?.count
             }
-            cell.textLabel?.text = tweeterName
-            cell.detailTextLabel?.text = postedDate?.formatForTweet()
-            
+            cell.textLabel?.text = mentionName
+            cell.detailTextLabel?.text = String(mentionedInCount ?? 0)
         }
 
         return cell
