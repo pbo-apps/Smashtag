@@ -28,7 +28,7 @@ class TweetDetailTableViewController: UITableViewController {
     }
     
     private enum TweetDetail {
-        case Mention(String, [Mention])
+        case Mention(String, [Twitter.Mention])
         case Media(String, [MediaItem])
         
         var count: Int {
@@ -125,7 +125,7 @@ class TweetDetailTableViewController: UITableViewController {
         switch segue.identifier! {
         case Storyboard.SearchMentionSegueIdentifier:
             if let ttvc = segue.destination as? TweetTableViewController {
-                if let mention = sender as? Mention {
+                if let mention = sender as? Twitter.Mention {
                     ttvc.searchText = mention.keyword
                 }
             }

@@ -88,15 +88,20 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     private func printDatabaseStatistics() {
         tweetContainer.viewContext.perform {
             // This is an inefficient way of counting, as it fetches husks of all the data rows and then counts on the code-side
-            let request: NSFetchRequest<TwitterUser> = TwitterUser.fetchRequest()
-            if let results = try? self.tweetContainer.viewContext.fetch(request) {
+            let requestUsers: NSFetchRequest<TwitterUser> = TwitterUser.fetchRequest()
+            if let results = try? self.tweetContainer.viewContext.fetch(requestUsers) {
                 print("\(results.count) TwitterUsers")
             }
             // This is a more efficient way of counting, as the count happens on the DB side and only the integer number is returned
-            let requestTweetCount: NSFetchRequest<Tweet> = Tweet.fetchRequest()
-            if let tweetCount = try? self.tweetContainer.viewContext.count(for: requestTweetCount) {
+            let requestTweets: NSFetchRequest<Tweet> = Tweet.fetchRequest()
+            if let tweetCount = try? self.tweetContainer.viewContext.count(for: requestTweets) {
                 print("\(tweetCount) Tweets")
             }
+            let requestMentions: NSFetchRequest<Mention> = Mention.fetchRequest()
+            if let mentionCount = try? self.tweetContainer.viewContext.count(for: requestMentions) {
+                print("\(mentionCount) Mentions")
+            }
+
         }
     }
     

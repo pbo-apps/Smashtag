@@ -1,5 +1,5 @@
 //
-//  Tweet+Implementation.swift
+//  Tweet+Create.swift
 //  Smashtag
 //
 //  Created by Pete Bounford on 28/02/2017.
@@ -28,6 +28,9 @@ extension Tweet {
         tweet.text = twitterInfo.text
         tweet.posted = twitterInfo.created as NSDate?
         tweet.tweeter = TwitterUser.create(from: twitterInfo.user, for: context)
+        for twitterMention in twitterInfo.userMentions + twitterInfo.hashtags {
+            tweet.addToMentions(Mention.create(from: twitterMention, for: context))
+        }
         return tweet
     }
 }

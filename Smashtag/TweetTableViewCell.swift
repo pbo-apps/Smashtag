@@ -76,7 +76,7 @@ class TweetTableViewCell: UITableViewCell {
 }
 
 private extension NSMutableAttributedString {
-    func highlight(_ color: UIColor, for mentions: [Mention]) {
+    func highlight(_ color: UIColor, for mentions: [Twitter.Mention]) {
         for mention in mentions {
             self.addAttribute(NSForegroundColorAttributeName, value: color, range: mention.nsrange)
         }

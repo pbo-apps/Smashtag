@@ -1,5 +1,5 @@
 //
-//  TwitterUser+Implementation.swift
+//  TwitterUser+Create.swift
 //  Smashtag
 //
 //  Created by Pete Bounford on 01/03/2017.
