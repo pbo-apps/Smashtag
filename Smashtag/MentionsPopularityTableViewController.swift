@@ -21,8 +21,9 @@ class MentionsPopularityTableViewController: CoreDataTableViewController<Tweet> 
     
     private func updateUI() {
         if let context = managedObjectContext, searchText != nil, searchText!.characters.count > 0 {
+            self.navigationItem.title = "Tweets containing " + searchText!
             let request: NSFetchRequest<Tweet> = Tweet.fetchRequest()
-            //request.predicate = NSPredicate(format: "", <#T##args: CVarArg...##CVarArg#>)
+            request.predicate = NSPredicate(format: "text contains[c] %@", searchText!)
             request.sortDescriptors = [NSSortDescriptor(
                 key: "posted",
                 ascending: false
@@ -34,6 +35,7 @@ class MentionsPopularityTableViewController: CoreDataTableViewController<Tweet> 
                 cacheName: nil
             )
         } else {
+            self.navigationItem.title = "No tweets to display"
             fetchedResultsController = nil
         }
     }

@@ -17,6 +17,7 @@ class TweetersTableViewController: CoreDataTableViewController<TwitterUser> {
     
     private func updateUI() {
         if let context = managedObjectContext, mention != nil, mention!.characters.count > 0 {
+            self.navigationItem.title = "Tweeters mentioning " + mention!
             let request: NSFetchRequest<TwitterUser> = TwitterUser.fetchRequest()
             request.predicate = NSPredicate(format: "any tweets.text contains[c] %@", mention!)
             request.sortDescriptors = [NSSortDescriptor(
@@ -31,6 +32,7 @@ class TweetersTableViewController: CoreDataTableViewController<TwitterUser> {
                 cacheName: nil
             )
         } else {
+            self.navigationItem.title = "No tweeters to display"
             fetchedResultsController = nil
         }
     }

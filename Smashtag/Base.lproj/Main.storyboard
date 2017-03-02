@@ -270,10 +270,10 @@
             </objects>
             <point key="canvasLocation" x="-983" y="101"/>
         </scene>
-        <!--Search History Table View Controller-->
+        <!--Recent Searches-->
         <scene sceneID="cUv-j1-piu">
             <objects>
-                <tableViewController id="dpk-Lu-s5g" customClass="SearchHistoryTableViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Recent Searches" id="dpk-Lu-s5g" customClass="SearchHistoryTableViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="QQz-JF-wEZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -305,7 +305,9 @@
                             <outlet property="delegate" destination="dpk-Lu-s5g" id="FAL-Er-1VX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="QgR-5E-pdH"/>
+                    <navigationItem key="navigationItem" title="Recent search terms" id="QgR-5E-pdH">
+                        <barButtonItem key="backBarButtonItem" title="Recent..." id="53d-MU-dUB"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="hj2-7c-mdt" kind="show" identifier="Search Historic Term" id="hq4-1m-dXI"/>
                     </connections>
