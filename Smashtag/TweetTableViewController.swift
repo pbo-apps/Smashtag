@@ -74,6 +74,12 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             for twitterInfo in newTweets {
                 _ = Tweet.create(from: twitterInfo, for: self.tweetContainer.viewContext)
             }
+            do {
+                try self.tweetContainer.viewContext.save()
+            } catch {
+                print("Error saving tweets for searchText: \(self.searchText)")
+                print("Exception: \( error)")
+            }
         }
         printDatabaseStatistics()
         print("Done printing database statistics")
